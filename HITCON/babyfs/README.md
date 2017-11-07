@@ -43,5 +43,5 @@ Take index and progress validation check same as read menu. We can write file da
 
 #### Close
 
-If index and streamPtr is not NULL, it frees **char \*fileData** and nullify other region without **char /*streamPtr**. **char /*streamPtr** nullified after fclose(streamPtr) called.
+If index and streamPtr is not NULL, it frees **char \*fileData** and nullify other region without **char \*streamPtr**. **char \*streamPtr** nullified after fclose(streamPtr) called.
 
