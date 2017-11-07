@@ -239,7 +239,7 @@ So, If we free second chunk and unsorted bin's fd, bk(library pointer) are writt
 
 Great! So call vtable after modify +0x230 pointer to vtable address-0x18, +0x240 pointer to system then we can get shell!
 
-> The final exploit scenario:
+The final exploit scenario:
 >- Allocate 3 file streams
 >- Get heap and libc address by above method (set _\_IO_read_end_ to avoid null byte at the end) 
 >- Free file 0, make 2 library pointer differs 0x10.
