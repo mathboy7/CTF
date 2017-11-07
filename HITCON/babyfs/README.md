@@ -225,4 +225,19 @@ However, we should be note that there is another library pointer at the end of t
 0x555555758240:	0x0000000000000000	0x0000000000000000
 ```
 
-So, If we free second chunk and unsorted bin's fd, bk(library pointer) is written in next heap+0x240 address, there is two pointer that satisfies the condition.<br>
+So, If we free second chunk and unsorted bin's fd, bk(library pointer) is written in next heap+0x240 address, there are two pointers that satisfies the condition.<br>
+
+```
+0x5555557581e0:	0x0000000000000000	0x0000000000000000
+0x5555557581f0:	0x0000000000000000	0x0000000000000000
+0x555555758200:	0x0000000000000000	0x0000000000000000
+0x555555758210:	0x0000000000000000	0x0000000000000000
+0x555555758220:	0x0000000000000000	0x0000000000000000
+0x555555758230:	0x00007ffff7dd0260	0x0000000000000411
+0x555555758240:	0x00007ffff7dd1b78	0x00007ffff7dd1b78
+```
+
+Great! So call vtable after modify +0x230 pointer to vtable address-0x18, +0x240 pointer to system then we can get shell!
+
+> The final exploit scenario:
+>- asdf
