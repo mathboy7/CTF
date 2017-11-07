@@ -180,7 +180,10 @@ And this is the assembly code that calls the vtable function.
    0x7f36269526db <_IO_flush_all_lockp+395>:	jbe    0x7f3626952850 <_IO_flush_all_lockp+768>
    0x7f36269526e1 <_IO_flush_all_lockp+401>:	mov    esi,0xffffffff
    0x7f36269526e6 <_IO_flush_all_lockp+406>:	mov    rdi,rbx
-   0x7f36269526e9 <_IO_flush_all_lockp+409>:	call   QWORD PTR [rax+0x18]
+   0x7f36269526e9 <_IO_flush_all_lockp+409>:	call   QWORD PTR [rax+0x18] # call part
 ```
 
-Register "rbx" stores a pointer of our fake input.
+Register "rbx" stores a pointer of our fake input.<br>
+We can call \*(\*(addr+0xd8)+0x18) but \*(addr+0xd8) must be code in the library vtable area.<br>
+
+So I modify \*(addr+0xd8) to (libc + 0x3bdbd0 - 0x18), \_IO_flush_all_lockp+409 will call _sub_748E0_ function.<br>
