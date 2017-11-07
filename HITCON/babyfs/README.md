@@ -47,3 +47,7 @@ If index and streamPtr is not NULL, it frees **char \*fileData** and nullify oth
 So where does the vulnerability occurs? It occurs at open menu. The size will return -1 and stored at **fileLen** if we give "/dev/fd/0" or "/dev/stdin" for file name, but buffer allocates size+1 so it will normally allocate heap buffer by malloc(0). **unsigned __int64 fileLen** is **unsigned int**, so heap overflow will occur if we give size bigger than 0x20 in read menu.
 
 ### Exploit
+
+We always have to think what data can we overwrite.<br>
+We think some heap tricks and exploitation techniques are useless cause conditions are too restrictive and we don't know any addresses.<br>
+So yes, lets leak some addresses first.
