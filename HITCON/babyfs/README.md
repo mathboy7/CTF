@@ -37,9 +37,9 @@ If file name invalid, function opens error log file and write file name which we
 After open the file successfully get file length using fseek() and allocate data buffer (size fileLen+1) for read file.
 
 - Read
-In read menu, program take index we opened from user.<br>
-If index is invalid then get size to read. After comparing size with filesize call fread() to read data from file.<br>
-Data is stored at **char \*fileData**.
+-- In read menu, program take index we opened from user.<br>
+-- If index is invalid then get size to read. After comparing size with filesize call fread() to read data from file.<br>
+-- Data is stored at **char \*fileData**.
 
 - Write
 Take index and progress validation check same as read menu.<br>
