@@ -35,4 +35,4 @@ We can open maximum 3 files at the same time in open menu. Function get file nam
 
 #### Read
 
-In read menu, program take index we opened from user. If index is invalid then get size to read. After comparing size with filesize call fread() to read data from file. Data is stored at **char *fileData**.
+In read menu, program take index we opened from user. If index is invalid then get size to read. After comparing size with filesize call fread() to read data from file. Data is stored at **char \*fileData**.
