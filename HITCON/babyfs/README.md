@@ -56,7 +56,7 @@ So where does the vulnerability occurs? It occurs at open menu.<br>
 The size will return -1 and stored at **fileLen** if we give "/dev/fd/0" or "/dev/stdin" for file name, but buffer allocates size+1 so it will normally allocate heap buffer by malloc(0).<br>
 **unsigned __int64 fileLen** is **unsigned int**, so heap overflow will occur if we give size bigger than 0x20 in read menu.
 
-### Exploit
+### Exploit - Intended
 
 We always have to think what data can we overwrite.<br>
 The most intuitive attack vector is the contents of the \_IO_FILE structure, which allocated in the heap directly.<br>
@@ -122,6 +122,7 @@ I tried to exploit using the above method, but there were some serious problems.
 
 First, the binary was running with socat, some character was truncated.<br>
 In particular **"\x7f"** is treated as a backspace, so I can't input the address of the library area.
+(intended solution is bypass check with "\x16\x7f" and follow the above scenario. I want to suggest another solution that purely not using "\x7f".)
 
 Therefore, we can't overwrite the library address in the location we want.<br>
 However, that you can not use "\x7f" does not necessarily mean you can't enter the address of the library area into memory.<br>
