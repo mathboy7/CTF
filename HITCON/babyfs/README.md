@@ -1,6 +1,6 @@
 babyfs - Pwn 315 (Solver 13)
 -------------
-## Description
+### Description
 Baby or not baby is up to you.<br>
 nc 52.198.183.186 50216<br>
 (link to binary and libc)
@@ -59,13 +59,8 @@ The size will return -1 and stored at **fileLen** if we give "/dev/fd/0" or "/de
 ### Exploit
 
 We always have to think what data can we overwrite.<br>
-We think some heap tricks and exploitation techniques are useless cause conditions are too restrictive and we don't know any addresses.<br>
-So yes, lets leak some addresses first.
-
-#### Leak
-
 The most intuitive attack vector is the contents of the \_IO_FILE structure, which allocated in the heap directly.
-We looked at the \_IO_FILE structure and thought its enough to get memory address leak by overwriting it.
+We looked at the \_IO_FILE structure and thought its enough to get arbitrary read/write by manipulating \_IO_read_ptr and \_IO_write_ptr to our input.
 
 ```c
 struct _IO_FILE {
@@ -111,3 +106,8 @@ struct _IO_FILE {
 #ifdef _IO_USE_OLD_IO_FILE
 };
 ```
+
+So, the scenario looks very simple.<br>
+>- Allocate 2 file streams. (/dev/fd/0 and anything else)
+>- Overwrite second file stream's \_IO_read_ptr and call file 1's write menu.
+>- Close file 1, allocate file 1 and 
