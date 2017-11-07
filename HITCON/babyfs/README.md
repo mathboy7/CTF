@@ -188,4 +188,5 @@ We can call \*(\*(addr+0xd8)+0x18) but \*(addr+0xd8) must be code in the library
 
 So I modify \*(addr+0xd8) to (libc + 0x3bdbd0 - 0x18), _\_IO_flush_all_lockp+409_ will call _sub_748E0_ function.<br>
 In _sub_748E0_, check some conditions and call \*(addr+0xe8) without any checks.<br>
+
 Yes, so if the pointers in both library areas are in the heap and their addresses differ by 0x10, we can modify first pointer to (libc+0x3bdbd0-0x18) and second pointer to system by arbitrary overwrite explained as above, there will be flag.<br>
