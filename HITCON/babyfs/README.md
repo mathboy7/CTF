@@ -13,7 +13,7 @@ It's a CTF-style menu challenge, easy to reversing, hard to exploit.
 ### Reversing
 Okay, so lets check out how each functions are working.
 
-#### Open
+- Open
 
 First we have to know how program manage each file stream and its data.<br>
 In binary, it uses structure 1 to manage file stream and it allocated in .bss section (its global variable!).<br>
