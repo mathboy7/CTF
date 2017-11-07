@@ -134,3 +134,6 @@ I was excited to get the flag and run the script after change the offset, but th
 
 > Fatal error: glibc detected an invalid stdio handle
 
+So there is second problem, there was a new mitigation applied in latest version of libc. (after 2.24)
+It check the address of vtable before all virtual function call and if vtable invalid, just aborted.
+How can I exploit this binary?
