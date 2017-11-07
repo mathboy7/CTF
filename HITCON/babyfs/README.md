@@ -170,7 +170,7 @@ And this is the assembly code that calls the vtable function.
    0x7f36269526b3 <_IO_flush_all_lockp+355>:	mov    rax,QWORD PTR [rbx+0xa0]
 => 0x7f36269526ba <_IO_flush_all_lockp+362>:	mov    rcx,QWORD PTR [rax+0x18]
    0x7f36269526be <_IO_flush_all_lockp+366>:	cmp    QWORD PTR [rax+0x20],rcx
-   0x7f36269526c2 <_IO_flush_all_lockp+370>:	jbe    0x7f36269526f7 <_IO_flush_all_lockp+423>
+   0x7f36269526c2 <_IO_flush_all_lockp+370>:	jbe    0x7f36269526f7 <_IO_flush_all_lockp+423> # mitigation routine
    0x7f36269526c4 <_IO_flush_all_lockp+372>:	mov    rax,QWORD PTR [rbx+0xd8]
    0x7f36269526cb <_IO_flush_all_lockp+379>:	
     lea    rsi,[rip+0x33f1ee]        # 0x7f3626c918c0 <_IO_helper_jumps>
