@@ -121,8 +121,9 @@ Simple, huh?
 I tried to exploit using the above method, but there were some serious problems.
 
 First, the binary was running with socat, some character was truncated.<br>
-In particular **"\x7f"** is treated as a backspace, so I can't input the address of the library area.
-(intended solution is bypass check with "\x16\x7f" and follow the above scenario. I want to suggest another solution that purely not using "\x7f".)
+In particular **"\x7f"** is treated as a backspace, so I can't input the address of the library area.<br>
+(intended solution is bypass check with "\x16\x7f" and follow the above scenario.<br>
+I want to suggest another solution that purely not using "\x7f".)
 
 Therefore, we can't overwrite the library address in the location we want.<br>
 However, that you can not use "\x7f" does not necessarily mean you can't enter the address of the library area into memory.<br>
