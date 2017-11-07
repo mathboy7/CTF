@@ -225,7 +225,7 @@ However, we should be note that there is another library pointer at the end of t
 0x555555758240:	0x0000000000000000	0x0000000000000000
 ```
 
-So, If we free second chunk and unsorted bin's fd, bk(library pointer) is written in next heap+0x240 address, there are two pointers that satisfies the condition.<br>
+So, If we free second chunk and unsorted bin's fd, bk(library pointer) are written in next heap+0x240 address, there are two pointers that satisfies the condition.<br>
 
 ```
 0x5555557581e0:	0x0000000000000000	0x0000000000000000
