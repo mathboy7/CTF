@@ -143,7 +143,7 @@ How can I exploit this binary?<br>
 ### Exploit - Final
 
 So I thought calling other function that satisfy the condition.<br>
-I found one function that does not check condition while finding the useful vtable function in the library at 0x3bdbd0.
+I found one function that does not check condition at 0x3bdbd0 while finding the useful vtable function.
 
 > \_\_libc_IO_vtables:00000000003BDBD0                 dq offset sub_748E0
 
