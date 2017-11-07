@@ -33,3 +33,6 @@ struct __attribute__((aligned(8))) simpleFs
 
 We can open maximum 3 files at the same time in open menu. Function get file name at .bss section (global variable structure)and try to open file. If file name invalid, function opens error log file and write file name which we try to open. After open the file successfully get file length using fseek() and allocate data buffer (size fileLen+1) for read file.
 
+#### Read
+
+In read menu, program take index we opened from user. If index is invalid then get size to read. After comparing size with filesize call fread() to read data from file. Data is stored at **char *fileData**.
