@@ -247,16 +247,18 @@ Great! So call vtable after modify +0x230 pointer to vtable address-0x18, +0x240
 >- Overwrite second library pointer to system
 >- Close chunk 2, call system("/bin/sh")!
 
-> Closing /dev/fd/0 ...
-> /bin/sh: 0: can't access tty; job control turned off
-> $ id
-> uid=2139990319 gid=1337 groups=1337
-> $ cd /home/babyfs
-> $ ls
-> b4by_fl49  babyfs.bin  flag
-> $ 
-> $ cat b4by_fl49
-> hitcon{pl4y_w1th_f1l3_Struc7ure_1s_fUn}
-> $  
+> Closing /dev/fd/0 ...<br>
+> /bin/sh: 0: can't access tty; job control turned off<br>
+> $ id<br>
+> uid=2139990319 gid=1337 groups=1337<br>
+> $ cd /home/babyfs<br>
+> $ ls<br>
+> b4by_fl49  babyfs.bin  flag<br>
+> $ <br>
+> $ cat b4by_fl49<br>
+> hitcon{pl4y_w1th_f1l3_Struc7ure_1s_fUn}<br>
+> $  <br>
 
-It was great challenge!
+It was great challenge!<br>
+I took almost 30 hours to solve it :(<br>
+I learned really lot while thinking idea about bypassing vtable mitigation, thanks for angelboy XD (intended solution is very easy)
