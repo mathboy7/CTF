@@ -64,7 +64,7 @@ So yes, lets leak some addresses first.
 
 #### Leak
 
-The most intuitive attack vector is the contents of the \_IO_FILE structure, which is the file stream allocated to the heap.
+The most intuitive attack vector is the contents of the \_IO_FILE structure, which allocated in the heap directly.
 We looked at the \_IO_FILE structure and thought its enough to get memory address leak by overwriting it.
 
 ```c
