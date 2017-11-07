@@ -118,10 +118,10 @@ So, the scenario looks very simple.<br>
 Simple, huh?
 
 ### Exploit - Two little problems (crazy parts)
-I tried to exploit using the above method, but there were some serious problems.<br><br>
+I tried to exploit using the above method, but there were some serious problems.
 
 First, the binary was running with socat, some character was truncated.<br>
-In particular **"\x7f"** is treated as a backspace, so I can't input the address of the library area.<br><br>
+In particular **"\x7f"** is treated as a backspace, so I can't input the address of the library area.
 
 Therefore, we can't overwrite the library address in the location we want.<br>
 However, that you can not use "\x7f" does not necessarily mean you can't enter the address of the library area into memory.<br>
