@@ -13,7 +13,7 @@ It's a CTF-style menu challenge, easy to reversing, hard to exploit.
 ### Reversing
 Okay, so lets check out how each functions are working.
 
-- Open
+#### Open
 
 First we have to know how program manage each file stream and its data.<br>
 In binary, it uses structure 1 to manage file stream and it allocated in .bss section (its global variable!).<br>
@@ -36,17 +36,17 @@ We can open maximum 3 files at the same time in open menu. Function get file nam
 If file name invalid, function opens error log file and write file name which we try to open.<br>
 After open the file successfully get file length using fseek() and allocate data buffer (size fileLen+1) for read file.
 
-- Read
+#### Read
 -- In read menu, program take index we opened from user.<br>
 -- If index is invalid then get size to read. After comparing size with filesize call fread() to read data from file.<br>
 -- Data is stored at **char \*fileData**.
 
-- Write
+#### Write
 Take index and progress validation check same as read menu.<br>
 We can write file data only one time because it sets write flag when write menu called.<br>
 Menu returns "It have been writed !" strings if structure's isWrite flag != 0. If isWrite flag unsetted, function writes only one byte of file data to stdout stream.
 
-- Close
+#### Close
 If index and streamPtr is not NULL, it frees **char \*fileData** and nullify other region without **char \*streamPtr**.<br>
 **char \*streamPtr** nullified after fclose(streamPtr) called.
 
