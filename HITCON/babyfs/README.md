@@ -15,11 +15,11 @@ Okay, so lets check out how each functions are working.
 #### Open
 
 > struct __attribute__((aligned(8))) simpleFs
-{
-  char *streamPtr;
-  char *fileData;
-  char fileName[64];
-  __int64 fileLen;
-  __int32 isWrite;
-  __int32 padding;
-};
+> {
+>   char *streamPtr;
+>   char *fileData;
+>   char fileName[64];
+>   __int64 fileLen;
+>   __int32 isWrite;
+>   __int32 padding;
+> };
