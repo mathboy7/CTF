@@ -1,6 +1,6 @@
 babyfs - Pwn 315 (Solver 13)
 -------------
-`[TOC]`
+[TOC]
 ### Description
 Baby or not baby is up to you.<br>
 nc 52.198.183.186 50216<br>
