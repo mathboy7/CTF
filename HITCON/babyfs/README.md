@@ -44,6 +44,6 @@ If index and streamPtr is not NULL, it frees **char \*fileData** and nullify oth
 
 ### Vulnerability
 
-So where does the vulnerability occurs? It occurs at open menu. If we give "/dev/fd/0" or "/dev/stdin" for file name, the size will return -1 but buffer allocates size+1 so it will normally allocate heap buffer malloc(0). **unsigned __int64 fileLen** is **unsigned int**, so heap overflow will occur if we give size bigger than 0x20 in read menu.
+So where does the vulnerability occurs? It occurs at open menu. The size will return -1 and stored at **fileLen** if we give "/dev/fd/0" or "/dev/stdin" for file name, but buffer allocates size+1 so it will normally allocate heap buffer by malloc(0). **unsigned __int64 fileLen** is **unsigned int**, so heap overflow will occur if we give size bigger than 0x20 in read menu.
 
 ### Exploit
