@@ -59,7 +59,7 @@ The size will return -1 and stored at **fileLen** if we give "/dev/fd/0" or "/de
 ### Exploit
 
 We always have to think what data can we overwrite.<br>
-The most intuitive attack vector is the contents of the \_IO_FILE structure, which allocated in the heap directly.
+The most intuitive attack vector is the contents of the \_IO_FILE structure, which allocated in the heap directly.<br>
 We looked at the \_IO_FILE structure and thought its enough to get arbitrary read/write by manipulating \_IO_read_ptr and \_IO_write_ptr to our input.
 
 ```c
@@ -108,6 +108,13 @@ struct _IO_FILE {
 ```
 
 So, the scenario looks very simple.<br>
-- Allocate 2 file streams. (/dev/fd/0 and anything else)
+- Allocate 2 file streams. (/dev/fd/0, anything else)
 - Overwrite second file stream's \_IO_read_ptr and call file 1's write menu. (can read 1byte per attempt)
 - Close file 1, allocate file 1 and repeat it to get full address of heap and libc.
+- Close file 1 and allocate /dev/fd/0 again.
+- Overwrite /dev/fd/0's \_IO_write_ptr to \_\_free_hook and call file 1's read menu.
+- Overwrite \_\_free_hook to system or one-shot gadget, get shell!
+
+<br>Simple, huh?
+
+#### Two little problems
