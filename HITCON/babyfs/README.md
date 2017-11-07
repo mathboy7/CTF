@@ -13,6 +13,11 @@ It's a CTF-style menu challenge, easy to reversing, hard to exploit.
 Okay, so lets check out how each functions are working.
 
 #### Open
+
+First, we have to know how program manage each file stream and its data.
+In binary, it uses next structure to manage file stream, structures are global variable so it allocated in .bss section.
+And sadly, there is PIE in binary so maybe we cant use this metadata in exploit without PIE leak XD
+
 ```c
 struct __attribute__((aligned(8))) simpleFs
 {
