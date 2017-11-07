@@ -144,3 +144,20 @@ So I thought calling other function that satisfy the condition.<br>
 I have found one function that does not check condition while finding the useful vtable function in the library at 0x3bdbd0.
 
 > \_\_libc_IO_vtables:00000000003BDBD0                 dq offset sub_748E0
+
+```c
+// sub_748E0 vtable function
+int __fastcall sub_748E0(__int64 arg)
+{
+  __int64 argPtr; // rax@1
+
+  argPtr = *(arg + 0xA0);
+  if ( *(argPtr + 0x30) && !(*(arg + 0x74) & 8) )
+  {
+    (*(arg + 0xE8))();
+    argPtr = *(arg + 160);
+  }
+  *(argPtr + 48) = 0LL;
+  return IO_wdefault_finish(arg, 0LL);
+}
+```
