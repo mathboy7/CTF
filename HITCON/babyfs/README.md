@@ -108,6 +108,6 @@ struct _IO_FILE {
 ```
 
 So, the scenario looks very simple.<br>
->- Allocate 2 file streams. (/dev/fd/0 and anything else)
->- Overwrite second file stream's \_IO_read_ptr and call file 1's write menu.
->- Close file 1, allocate file 1 and 
+- Allocate 2 file streams. (/dev/fd/0 and anything else)
+- Overwrite second file stream's \_IO_read_ptr and call file 1's write menu.
+- Close file 1, allocate file 1 and 
