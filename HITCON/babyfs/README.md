@@ -61,3 +61,7 @@ The size will return -1 and stored at **fileLen** if we give "/dev/fd/0" or "/de
 We always have to think what data can we overwrite.<br>
 We think some heap tricks and exploitation techniques are useless cause conditions are too restrictive and we don't know any addresses.<br>
 So yes, lets leak some addresses first.
+
+#### Leak
+
+The most intuitive attack vector is the contents of the \_IO_FILE structure, which is the file stream allocated to the heap.
