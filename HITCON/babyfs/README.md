@@ -240,4 +240,4 @@ So, If we free second chunk and unsorted bin's fd, bk(library pointer) is writte
 Great! So call vtable after modify +0x230 pointer to vtable address-0x18, +0x240 pointer to system then we can get shell!
 
 > The final exploit scenario:
->- asdf
+>- 1. asdf
