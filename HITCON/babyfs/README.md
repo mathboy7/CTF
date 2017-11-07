@@ -36,3 +36,12 @@ We can open maximum 3 files at the same time in open menu. Function get file nam
 #### Read
 
 In read menu, program take index we opened from user. If index is invalid then get size to read. After comparing size with filesize call fread() to read data from file. Data is stored at **char \*fileData**.
+
+#### Write
+
+Take index and progress validation check same as read menu. We can write file data only one time because it sets write flag when write menu called. Menu returns "It have been writed !" strings if structure's isWrite flag != 0. If isWrite flag unsetted, function writes only one byte of file data to stdout stream.
+
+#### Close
+
+If index and streamPtr is not NULL, it frees **char \*fileData** and nullify other region without **char /*streamPtr**. **char /*streamPtr** nullified after fclose(streamPtr) called.
+
