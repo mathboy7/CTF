@@ -108,9 +108,9 @@ struct _IO_FILE {
 ```
 
 So, the scenario looks very simple.<br>
-- Allocate 2 file streams. (/dev/fd/0, anything else)
-- Overwrite second file stream's \_IO_read_ptr and call file 1's write menu. (can read 1byte per attempt)
-- Close file 1, allocate file 1 and repeat it to get full address of heap and libc.
+- Allocate 2 file streams. (/dev/fd/0, anything else)  
+- Overwrite second file stream's \_IO_read_ptr and call file 1's write menu. (NULL byte appended to the end because it use fread, need brute-force for 0.5 byte.)
+- Close file 1, allocate file 1 and repeat it to get full address of heap and libc. (can read 1byte per attempt)
 - Close file 1 and allocate /dev/fd/0 again.
 - Overwrite /dev/fd/0's \_IO_write_ptr to \_\_free_hook and call file 1's read menu.
 - Overwrite \_\_free_hook to system or one-shot gadget, get shell!
@@ -120,4 +120,5 @@ Simple, huh?
 #### Two little problems (crazy parts)
 I tried to exploit using the above method, but there were some serious problems.<br>
 First, the binary was running with socat, some character was truncated.<br>
-In particular "\x7f" is treated as a backspace, so I can't input the address of the library area.<br>
+In particular "\x7f" is treated as a backspace, so I can't input the address of the library area.<br><br>
+Therefore, we can not overwrite the library address in the area we want.
