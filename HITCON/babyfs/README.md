@@ -25,7 +25,7 @@ struct __attribute__((aligned(8))) simpleFs
   char *streamPtr;
   char *fileData;
   char fileName[64];
-  __int64 fileLen;
+  unsigned __int64 fileLen;
   __int32 isWrite;
   __int32 padding;
 };
@@ -42,3 +42,8 @@ Take index and progress validation check same as read menu. We can write file da
 #### Close
 If index and streamPtr is not NULL, it frees **char \*fileData** and nullify other region without **char \*streamPtr**. **char \*streamPtr** nullified after fclose(streamPtr) called.
 
+### Vulnerability
+
+So where does the vulnerability occurs? It occurs at open menu. If we give "/dev/fd/0" or "/dev/stdin" for file name, the size will return -1 but buffer allocates size+1 so it will normally allocate heap buffer malloc(0). **unsigned __int64 fileLen** is **unsigned int**, so heap overflow will occur if we give size bigger than 0x20 in read menu.
+
+### Exploit
