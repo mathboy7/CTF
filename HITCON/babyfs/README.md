@@ -14,11 +14,12 @@ Okay, so lets check out how each functions are working.
 
 #### Open
 
-First, we have to know how program manage each file stream and its data.
-In binary, it uses next structure to manage file stream, structures are global variable so it allocated in .bss section.
-And sadly, there is PIE in binary so maybe we cant use this metadata in exploit without PIE leak XD
+First we have to know how program manage each file stream and its data.
+In binary, it uses structure 1 to manage file stream and it allocated in .bss section (its global variable!).
+And sadly, there is PIE in binary so we cant use this metadata in exploit without PIE leak XD
 
 ```c
+// Structure 1
 struct __attribute__((aligned(8))) simpleFs
 {
   char *streamPtr;
@@ -29,3 +30,6 @@ struct __attribute__((aligned(8))) simpleFs
   __int32 padding;
 };
 ```
+
+We can open maximum 3 files at the same time in open menu. Function get file name at .bss section (global variable structure)and try to open file. If file name invalid, function opens error log file and write file name which we try to open. After open the file successfully get file length using fseek() and allocate data buffer (size fileLen+1) for read file.
+
