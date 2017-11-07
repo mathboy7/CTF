@@ -189,4 +189,40 @@ We can call \*(\*(addr+0xd8)+0x18) but \*(addr+0xd8) must be code in the library
 So I modify \*(addr+0xd8) to (libc + 0x3bdbd0 - 0x18), _\_IO_flush_all_lockp+409_ will call _sub_748E0_ function.<br>
 In _sub_748E0_, check some conditions and call \*(addr+0xe8) without any checks.<br>
 
-Yes, so if the pointers in both library areas are in the heap and their addresses differ by 0x10, we can modify first pointer to (libc+0x3bdbd0-0x18) and second pointer to system by arbitrary overwrite explained as above, there will be flag.<br>
+Yes, so if the pointers in both library areas are in the heap and their addresses differ by 0x10, we can modify first pointer to (libc+0x3bdbd0-0x18) and second pointer to system by arbitrary overwrite explained as above, we will get the shell.<br>
+
+However the are no library pointers that condition satifies.<br>
+But we can create library pointers by making unsorted bin.<br>
+When we opens new file, it allocates two chunks in heap and binary allocates data chunk.<br>
+First chunk is the file stream chunk, second is the file data chunk.<br>
+However, we should be note that there is another library pointer at the end of the file stream chunk.<br>
+
+```
+0x555555758000:	0x0000000000000000	0x0000000000000231
+0x555555758010:	0x00000000fbad2688	0x0000555555758240
+0x555555758020:	0x0000555555758240	0x0000555555758240
+0x555555758030:	0x0000555555758240	0x0000555555758240
+0x555555758040:	0x0000555555758240	0x0000555555758240
+0x555555758050:	0x0000555555758640	0x0000000000000000
+0x555555758060:	0x0000000000000000	0x0000000000000000
+0x555555758070:	0x0000000000000000	0x00007ffff7dd2540
+0x555555758080:	0x0000000000000003	0x0000000000000000
+0x555555758090:	0x0000000000000000	0x00005555557580f0
+0x5555557580a0:	0xffffffffffffffff	0x0000000000000000
+0x5555557580b0:	0x0000555555758100	0x0000000000000000
+0x5555557580c0:	0x0000000000000000	0x0000000000000000
+0x5555557580d0:	0x0000000000000000	0x0000000000000000
+0x5555557580e0:	0x0000000000000000	0x00007ffff7dd06e0
+
+...
+
+0x5555557581e0:	0x0000000000000000	0x0000000000000000
+0x5555557581f0:	0x0000000000000000	0x0000000000000000
+0x555555758200:	0x0000000000000000	0x0000000000000000
+0x555555758210:	0x0000000000000000	0x0000000000000000
+0x555555758220:	0x0000000000000000	0x0000000000000000
+0x555555758230:	0x00007ffff7dd0260	0x0000000000000411
+0x555555758240:	0x0000000000000000	0x0000000000000000
+```
+
+So, If we free second chunk and unsorted bin's fd, bk(library pointer) is written in next heap+0x240 address, there is two pointer that satisfies the condition.<br>
