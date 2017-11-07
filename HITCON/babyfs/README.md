@@ -163,3 +163,24 @@ int __fastcall sub_748E0(__int64 arg)
   return IO_wdefault_finish(arg, 0LL);
 }
 ```
+
+And this is the assembly code that calls the vtable function.
+
+```asm
+   0x7f36269526b3 <_IO_flush_all_lockp+355>:	mov    rax,QWORD PTR [rbx+0xa0]
+=> 0x7f36269526ba <_IO_flush_all_lockp+362>:	mov    rcx,QWORD PTR [rax+0x18]
+   0x7f36269526be <_IO_flush_all_lockp+366>:	cmp    QWORD PTR [rax+0x20],rcx
+   0x7f36269526c2 <_IO_flush_all_lockp+370>:	jbe    0x7f36269526f7 <_IO_flush_all_lockp+423>
+   0x7f36269526c4 <_IO_flush_all_lockp+372>:	mov    rax,QWORD PTR [rbx+0xd8]
+   0x7f36269526cb <_IO_flush_all_lockp+379>:	
+    lea    rsi,[rip+0x33f1ee]        # 0x7f3626c918c0 <_IO_helper_jumps>
+   0x7f36269526d2 <_IO_flush_all_lockp+386>:	mov    rdx,rax
+   0x7f36269526d5 <_IO_flush_all_lockp+389>:	sub    rdx,rsi
+   0x7f36269526d8 <_IO_flush_all_lockp+392>:	cmp    r12,rdx
+   0x7f36269526db <_IO_flush_all_lockp+395>:	jbe    0x7f3626952850 <_IO_flush_all_lockp+768>
+   0x7f36269526e1 <_IO_flush_all_lockp+401>:	mov    esi,0xffffffff
+   0x7f36269526e6 <_IO_flush_all_lockp+406>:	mov    rdi,rbx
+   0x7f36269526e9 <_IO_flush_all_lockp+409>:	call   QWORD PTR [rax+0x18]
+```
+
+Register "rbx" stores a pointer of our fake input.
