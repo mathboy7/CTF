@@ -1,4 +1,4 @@
-babyfs - Pwn 315 (Solver 13)
+babyfs - Pwn 315 (13 Teams Solved)
 -------------
 ### Description
 Baby or not baby is up to you.<br>
