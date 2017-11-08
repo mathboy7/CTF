@@ -191,7 +191,7 @@ In _sub_748E0_, check some conditions and call \*(addr+0xe8) without any checks.
 
 Yes, so if the pointers in both library areas are in the heap and their addresses differ by 0x10, we can modify first pointer to (libc+0x3bdbd0-0x18) and second pointer to system by arbitrary overwrite explained as above, we will get the shell.<br>
 
-However the are no library pointers that condition satifies.<br>
+However there are no library pointers that condition satifies.<br>
 But we can create library pointers by making unsorted bin.<br>
 When we opens new file, it allocates two chunks in heap and binary allocates data chunk.<br>
 First chunk is the file stream chunk, second is the file data chunk.<br>
