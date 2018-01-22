@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jackie Stewart's Sapeurs Shop</title>
+    <base href="http://0daysober.ch/sapeloshop/">
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+    <script>
+      function dopost(action, value) {
+          var form = document.createElement("form");
+          form.setAttribute("method", "post");
+          form.setAttribute("action", "http://127.0.0.1:31337/"+action);
+          var myfield = document.createElement("input");
+          myfield.setAttribute("type", "hidden");
+          myfield.setAttribute("name", "desc");
+          myfield.setAttribute("value", value);
+          form.appendChild(myfield);
+          document.body.appendChild(form);
+          form.submit();
+      }
+    </script>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="navbar navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between">
+          <a href="http://127.0.0.1:31337/" class="navbar-brand">Home</a>
+          <a href="http://127.0.0.1:31337/cart" class="navbar-brand">My Cart</a>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">The sapelogie prophet</h1>
+              <a href="https://www.youtube.com/watch?v=y1_rICMbKmU"><img src="img/jackie_stewart.jpg" style="height: 280px; width: 100%; display: block;"></a>
+              <p class="card-text">Jackie Stewart</p>
+          <p class="lead text-muted">Real sapeurs know were to shop! You can buy everything here to look just like me!</p>
+        </div>
+      </section>
+
+      <div class="album text-muted">
+        <div class="container">
+
+          <div class="row">
+            <div class="card">
+              <img src="img/eyewear_dolce.jpg" style="height: 280px; width: 100%; display: block;" alt="eyewear_dolce.jpg" onclick="dopost('add','eyewear_dolce.jpg');">
+              <p class="card-text">The eyewear, Dolce &amp; Gabbana.</p>
+            </div>
+            <div class="card">
+              <img src="img/paul_smith_suit.jpg" style="height: 280px; width: 100%; display: block;" alt="paul_smith_suit.jpg" onclick="dopost('add','paul_smith_suit.jpg');">
+              <p class="card-text">The suit. Paul Smith. Super 160'. It's not anything.</p>
+            </div>
+            <div class="card">
+              <img src="img/brown_boxer.jpg" style="height: 280px; width: 100%; display: block;" alt="brown_boxer.jpg" onclick="dopost('add','brown_boxer.jpg');">
+              <p class="card-text">The brown boxer short assorted to the suit.</p>
+            </div>
+            <div class="card">
+              <img src="img/black_belt.jpg" style="height: 280px; width: 100%; display: block;" alt="black_belt.jpg" onclick="dopost('add','black_belt.jpg');">
+              <p class="card-text">The belt. Black as the shoes.</p>
+            </div>
+            <div class="card">
+              <img src="img/armani_tie.jpg" style="height: 280px; width: 100%; display: block;" alt="armani_tie.jpg" onclick="dopost('add','armani_tie.jpg');">
+              <p class="card-text">The Armani Tie, very mystic.</p>
+            </div>
+            <div class="card">
+              <img src="img/black_shoes.jpg" style="height: 280px; width: 100%; display: block;" alt="black_shoes.jpg" onclick="dopost('add','black_shoes.jpg');">
+              <p class="card-text">The black shoes.</p>
+            </div>
+            <div class="card">
+              <img src="img/brown_socks.jpg" style="height: 280px; width: 100%; display: block;" alt="brown_socks.jpg" onclick="dopost('add','brown_socks.jpg');">
+              <p class="card-text">The brown socks. Assorted to the boxer.</p>
+            </div>
+            <div class="card">
+              <img src="img/brown_watch.jpg" style="height: 280px; width: 100%; display: block;" alt="brown_watch.jpg" onclick="dopost('add','brown_watch.jpg');">
+              <p class="card-text">The brown watch, function with blood.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p>&copy; Jackie Stewart. Gabao RPZ à point 0.</p>
+      </div>
+    </footer>
+  </body>
+</html>
