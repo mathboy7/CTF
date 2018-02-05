@@ -21,8 +21,8 @@ def login(ID, pw):
 	print r.recvuntil("Choice:")
 
 def download(URL):
-	r.sendline(p32(8))
-	r.sendline(p32(1))
+	r.send(p32(8))
+	r.send(p32(1))
 	r.sendline(URL)
 
 r = remote("ch41l3ng3s.codegate.kr", 2121)
