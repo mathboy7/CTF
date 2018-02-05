@@ -54,7 +54,6 @@ ret
 canary
 ...
 ============ <= stack of downloadURL
-...
 '''
 
 login_cnt
