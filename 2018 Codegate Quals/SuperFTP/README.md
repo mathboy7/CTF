@@ -43,7 +43,15 @@ After login() function called, code increment/decrements the main scope variable
 Free info_ptr, info_ptr->id, info_ptr->pw, info_ptr->name and nullify info_ptr if login flag is valid.
 
 ### Download Files
+First, downloadFile() menu recieves URL string.
+Menu replaces string such as "/home/mathboy7/pwn/../bb" to "/home/mathboy7/bb".
+The algorithm used in this process is as follows.
 
+1. Recieves URL. ("/home/mathboy7/pwn/../bb")
+2. Reverse string ("bb/../nwp/7yobhtam/emoh/"), g_URL points start of reversed string.
+3. Search "/../" pattern. Variable ptr1 points "/../nwp/7yobhtam/emoh/" now.
+4. Search "/" corresponding to "/../" and stores to ptr2. In this case, ptr2 points "/7yobhtam/emoh/".
+5. copy [start ~ "/../"] before ptr2 => ("bb/7yobhtam/emoh")
 
 ### Hidden menu1 (menu 7)
 Not important.
