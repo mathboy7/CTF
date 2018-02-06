@@ -77,18 +77,20 @@ More specifically, if the URL has "/../" pattern without the corresponding "/" c
 If we try to login multiple time to set loginCnt 0x2f, we can write our payload to stack of main().
 Let's take a simple look of stack structure.
 
+```
+============ <= stack of main
+...
+login_cnt    <= copy payload.reverse() until ret, before canary.
+...
+============ <= stack of menu 8
+...
+ret
+...
+canary
+...
+============ <= stack of downloadURL
 
-============ <= stack of main<br>
-...<br>
-login_cnt    <= copy payload.reverse() until ret, before canary.<br>
-...<br>
-============ <= stack of menu 8<br>
-...<br>
-ret<br>
-...<br>
-canary<br>
-...<br>
-============ <= stack of downloadURL<br><br>
+```
 
 So we can overwrite menu 8's return address without touching canary.
 
