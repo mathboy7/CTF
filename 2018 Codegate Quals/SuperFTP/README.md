@@ -51,7 +51,10 @@ The algorithm used in this process is as follows.
 2. Reverse string ("bb/../nwp/7yobhtam/emoh/"), g_URL points start of reversed string.
 3. Search "/../" pattern. Variable ptr1 points "/../nwp/7yobhtam/emoh/" now.
 4. Search "/" corresponding to "/../" and stores to ptr2. In this case, ptr2 points "/7yobhtam/emoh/".
-5. copy [start ~ "/../"] before ptr2 => ("bb/7yobhtam/emoh")
+5. Copy [start ~ "/../"] before ptr2 => ("bb/7yobhtam/emoh/")
+6. Reverse string again, ptr points "/home/mathboy7/bb" now!
+
+Simple XD
 
 ### Hidden menu1 (menu 7)
 Not important.
@@ -61,3 +64,12 @@ provide 4 menus, menu 2/3/4 is not important.
 menu 1 performs exactly same behavior with "Download Files" menu.
 
 The only difference is that g_URL points to the stack buffer.
+
+## Vulnerability
+There are multiple vulnerability in this program but there is only one vulnerability that you should really pay attention to.
+
+If you focus at binary code, you can find that there is no boundary check at "Download Files" menu.
+
+More specifically, if the URL has "/../" pattern without the corresponding "/" character, it will exceed the range of URL buffer when searching for the "/" character.
+
+## Exploit
