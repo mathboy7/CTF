@@ -73,3 +73,8 @@ If you focus at binary code, you can find that there is no boundary check at "Do
 More specifically, if the URL has "/../" pattern without the corresponding "/" character, it will exceed the range of URL buffer when searching for the "/" character.
 
 ## Exploit
+"loginCnt" variable is located in stack of main().
+If we try to login multiple time to set loginCnt 0x2f, we can write our payload to stack of main().
+Let's take a simple look of stack structure.
+
+================= <= main()
