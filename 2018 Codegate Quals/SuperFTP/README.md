@@ -14,8 +14,8 @@ Program provide 8 menus.
 6. exit
 7, 8 -> hidden menus
 
-There is info pointer for manage account information at $ebp-0x20 of main stack.
-
+There is **info_ptr** pointer for manage account information at $ebp-0x20 of main stack.
+The members of info structure are:
 ```c
 struct info
 {
@@ -25,3 +25,7 @@ struct info
   int age;
 };
 ```
+
+### Join
+Program inputs name, age, id, pw and create info structure.
+Stores info structure ptr at info_ptr.
