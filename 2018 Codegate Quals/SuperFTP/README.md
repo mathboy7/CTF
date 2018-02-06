@@ -89,7 +89,6 @@ ret
 canary
 ...
 ============ <= stack of downloadURL
-
 ```
 
 So we can overwrite menu 8's return address without touching canary.
