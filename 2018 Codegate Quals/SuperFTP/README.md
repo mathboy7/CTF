@@ -1,9 +1,9 @@
 SuperFTP - Pwn 600pt (13 Teams Solved)
 -------------
-### Description
+## Description
 SuperFTP is simple x86-menu challenge with ASLR+NX+SSP+PIE+Full RELRO.
 
-### Program Overview
+## Program Overview
 Program provide 8 menus.
 
 1. Join
@@ -26,7 +26,7 @@ struct info
 };
 ```
 
-#### Join
+### Join
 Program recieves name, age, id, pw and create info structure.
 Stores info structure ptr at info_ptr.
 
