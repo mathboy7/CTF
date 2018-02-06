@@ -94,4 +94,16 @@ So we can overwrite menu 8's return address without touching canary.
 
 The final exploit flow is shown below.
 
-1. Login with 
+1. Login with admin
+2. Download URL with "/../aa/../", leak pointer of libc.
+3. Set loginCnt to 0x2f.
+4. Send payload and overwrite menu 8's return address.
+
+```
+$ id
+uid=1000(ftp) gid=1000(ftp) groups=1000(ftp)
+$ 
+$ cat flag
+Sorry_ftp_1s_brok3n_T_T@
+$ 
+'''
