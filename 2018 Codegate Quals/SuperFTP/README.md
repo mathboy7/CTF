@@ -39,4 +39,17 @@ A buffer overflow occurs because the program uses the cin () function when it re
 If the ID and password match with "admin" and "P3ssw0rd", activate the admin flag and the login flag. If they do not match the admin information but match the user information, only the login flag is activated.
 After login() function called, code increment/decrements the main scope variable "loginCnt" depending on result of login().
 
-### 
+### Withdrawal
+Free info_ptr, info_ptr->id, info_ptr->pw, info_ptr->name and nullify info_ptr if login flag is valid.
+
+### Download Files
+
+
+### Hidden menu1 (menu 7)
+Not important.
+
+### Hidden menu2 (menu 8)
+provide 4 menus, menu 2/3/4 is not important.
+menu 1 performs exactly same behavior with "Download Files" menu.
+
+The only difference is that g_URL points to the stack buffer.
