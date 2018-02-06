@@ -26,7 +26,7 @@ struct info
 };
 ```
 
-### Join
+#### Join
 Program recieves name, age, id, pw and create info structure.
 Stores info structure ptr at info_ptr.
 
